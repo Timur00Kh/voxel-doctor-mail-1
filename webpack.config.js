@@ -1,11 +1,15 @@
 const path = require('path');
 const HtmlWebpackInlineStylePlugin = require('html-webpack-inline-style-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const args = require('minimist')(process.argv.slice(2));
+const DEV = args.dev;
 
-const imgb64 = require('./src/imgb64/imgb64.js')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
 
+const fs = require('fs');
+const content = JSON.parse(fs.readFileSync('./content.json', 'utf8'));
 
 
 module.exports = {
@@ -15,26 +19,20 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
+        new MiniCssExtractPlugin({
+            filename: "[name].css",
+            chunkFilename: "[id].css"
+        }),
         new HtmlWebpackPlugin({
-            template: './src/index.html',
+            template: './src/index.ejs',
             inlineSource: '.(css)$',
-            inject: true,
+            inject: DEV,
             params: {
-                imgb64: imgb64,
-                images: {
-                    pic1: 'https://timurkh.ru/voxel-doctor-mail-1/pic1.jpg',
-                    pic2: 'https://timurkh.ru/voxel-doctor-mail-1/pic2.jpg',
-                    footer: 'https://timurkh.ru/voxel-doctor-mail-1/footer.png',
-                    // footer: 'http://localhost:8080/images/footer.png',
-                    header: 'https://timurkh.ru/voxel-doctor-mail-1/header.png',
-                }
+                images: content.images
             }
         }),
-        new HtmlWebpackInlineSourcePlugin(),
         new HtmlWebpackInlineStylePlugin(),
-        new CopyPlugin([
-            { from: path.join(__dirname, 'src', 'images'), to: path.join(__dirname, 'dist', 'images') },
-        ]),
+        new HTMLInlineCSSWebpackPlugin(),
     ],
     devServer: {
         contentBase: './dist',
@@ -46,26 +44,19 @@ module.exports = {
             {
                 test: /\.s[ac]ss$/i,
                 use: [
-                    // Creates `style` nodes from JS strings
+                    MiniCssExtractPlugin.loader,
                     'style-loader',
-                    // Translates CSS into CommonJS
                     'css-loader',
-                    // Compiles Sass to CSS
                     'sass-loader',
                 ],
             },{
                 test: /\.css$/i,
                 use: [
-                    // Creates `style` nodes from JS strings
-                    'style-loader',
-                    // Translates CSS into CommonJS
+                    MiniCssExtractPlugin.loader,
+                    // 'style-loader',
                     'css-loader',
                 ],
             },
-            // {
-            //     test: /\.html$/,
-            //     loader: 'html-loader'
-            // }
         ],
 
     }

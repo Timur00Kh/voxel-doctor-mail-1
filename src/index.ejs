@@ -6,73 +6,34 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- normalize.css contents must be inlined to newsletter -->
-    <link href="styles.css" type="text/css" rel="stylesheet">
-    <!-- <link href="normalize.css" rel="stylesheet"> -->
-     <title></title>
     <style type="text/css">
-
-        #main{
-            max-width: 600px;
-            background: linear-gradient(135deg, #7AD431, #00874D) no-repeat;
-        }
-
-        .w-600 {
-            max-width: 600px;
-        }
-
-        #container {
-            font-family: Manrope,Arial, Helvetica, sans-serif;
-        }
-
-        #footer {
-            background: url(<%= htmlWebpackPlugin.options.params.images.footer%>) no-repeat;
-            font-size: 12px;
-            line-height: 12px;
-            font-weight: 300;
-        }
-
-        #footer a {
-            font-weight: 600;
-            color: #78B833;
-            text-decoration: none;
-        }
         #header {
             background: url(<%= htmlWebpackPlugin.options.params.images.header%>) no-repeat;
         }
 
-        .white-color {
-            color: white;
-        }
-        .left-container h4 {
-            font-weight: 600;
-            font-size: 13px;
-            line-height: 15px;
-            display: block;
-            margin-top: 1.33em;
-            margin-bottom: 1.33em;
-        }
-        .left-container h3 {
-            margin-top: 0;
-        }
-        img {
-            max-width: 100%;
-        }
-        .right-container p {
-            font-size: 12px;
-            line-height: 14px;
-            margin: 0;
-            font-family: Manrope, 'MS Sans Serif', Geneva, sans-serif;
-            font-weight: 500;
-        }
-        h1, h2, h3 {
-            line-height: 1.17em;
+        #footer {
+            background: url(<%= htmlWebpackPlugin.options.params.images.footer%>) no-repeat;
         }
     </style>
     <!--[if (gte mso 9)|(IE)]>
-        /* Put outlook.css contents here */
+        <style>
+            img {
+                /* Scaled images fix */
+                -ms-interpolation-mode: bicubic;
+                max-width: 300px;
+                display: none;
+            }
+            table {
+                /* Null tables spaces */
+                border-collapse: collapse;
+            }
+            h1, h2, h3, h4, h5, h6, p, span {
+                color: black; !important;
+            }
+        </style>
     <![endif]-->
     <!-- Left title element empty to prevent viewing this text in subject line on Android 4 email clients -->
+    <title></title>
 </head>
 
 <body class="body">
@@ -82,28 +43,35 @@
         <table id="container" width="100%" border="0" cellpadding="0" cellspacing="0">
             <tr cellpadding="0" cellspacing="0">
                 <th cellpadding="0" cellspacing="0" width="500" align="center">
-                    <table cellpadding="0" cellspacing="0" id="main">
+                    <table
+                            id="main"
+                            cellpadding="0"
+                            cellspacing="0"
+                            background="background: linear-gradient(135deg, #7AD431, #00874D) no-repeat;"
+                            bgcolor="background: linear-gradient(135deg, #7AD431, #00874D) no-repeat;"
+                    >
                         <tr>
                             <td style="padding: 0;">
                                 <table id="header" style="width: 600px; height: 201px;">
-                                    <tr>
-                                        <td valign="top" style="padding: 15px 25px 0 ">
-                                            <table><tr><td ><h1 style="color: white; margin: 0">Уважаемый<br> доктор!</h1></td></tr></table>
+                                    <tr style="height: 185px;">
+                                        <td valign="top" style="padding: 15px 25px 0; width: 35%">
+                                            <h1 class="capital" style="color: white; margin: 0">Уважаемый<br> доктор!</h1>
+                                        </td>
+                                        <td valign="bottom" style="padding:120px 25px 15px">
+                                             <h2 class="capital" style="color: white; margin: 0">Рады вам сообщить!</h2>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td align="right" valign="bottom" style="padding:0 25px 15px">
-                                            <table><tr><td ><h2 style="color: white; margin: 0">РАДЫ ВАМ СООБЩИТЬ!</h2></td></tr></table>
-                                        </td>
+
                                     </tr>
                                 </table>
                                 <table class="w-600">
                                    <tr>
                                        <td style="padding: 0 30px 0">
-                                           <h3 style="color: #5B5B5B; font-weight: 700; font-family: Manrope, Tahoma, Geneva, sans-serif; margin-top: 0; margin-bottom: 10px">
-                                                 В КАЗАНИ ПОЯВИЛОСЬ ПРЕДСТАВИТЕЛЬСТВО
-                                                 НЕЗАВИСИМОЙ СЕТИ РЕНТГЕН-ДИАГНОСТИЧЕСКИХ
-                                                 ЦЕНТРОВ ЕВРОПЕЙСКОГО УРОВНЯ <span style="font-weight: lighter">VOXEL</span>.
+                                           <h3 class="capital" style="color: #5B5B5B; font-weight: 700; font-family: Manrope, Tahoma, Geneva, sans-serif; margin-top: 0; margin-bottom: 10px">
+                                               В Казани появилось представительство
+                                               независимой сети рентген-диагностических
+                                               центров европейского уровня <span style="font-weight: lighter">VOXEL</span>.
                                            </h3>
                                        </td>
                                    </tr>
@@ -132,7 +100,13 @@
                                                плотность и многие другие параметры,
                                                необходимые каждый день в Вашей работе.
                                              </p>
+                                            <!--[if (gte mso 9)|(IE)]>
+                                                 <div style="display: none;">
+                                            <!--endif-->
                                              <img style="max-height: 262px;" alt src="<%= htmlWebpackPlugin.options.params.images.pic1 %>">
+                                            <!--[if (gte mso 9)|(IE)]>
+                                                 </div>
+                                            <!--endif-->
                                              <p>
                                                 Мы бесплатно проводим индивидуальное
                                                 обучение работе с программным
@@ -141,7 +115,13 @@
                                                 оториноларингологов и челюстно-лицевых
                                                 хирургов.
                                              </p>
+                                            <!--[if (gte mso 9)|(IE)]>
+                                                 <div style="display: none;">
+                                            <!--endif-->
                                              <img style="max-height: 262px;" alt src="<%= htmlWebpackPlugin.options.params.images.pic2 %>">
+                                            <!--[if (gte mso 9)|(IE)]>
+                                                 </div>
+                                            <!--endif-->
 
                                         </td>
                                     </tr>
